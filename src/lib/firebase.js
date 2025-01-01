@@ -10,11 +10,11 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "orbit-dcadf.firebaseapp.com",
-  projectId: "orbit-dcadf",
-  storageBucket: "orbit-dcadf.firebasestorage.app",
-  messagingSenderId: "210273450040",
-  appId: "1:210273450040:web:d6d7c0b17bf956f8d7cecd"
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET_ID,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGEING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
