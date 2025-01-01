@@ -37,8 +37,8 @@ const Login = () => {
         try {
           const response =   await signInWithEmailAndPassword(auth,email,password);
             console.log("The login data is:",response)
-            toast.success('Login successful')
             navigate('/');
+            toast.success('Login successful')
           } catch (error) {
             console.log(error)
             toast.error('Failed to login')

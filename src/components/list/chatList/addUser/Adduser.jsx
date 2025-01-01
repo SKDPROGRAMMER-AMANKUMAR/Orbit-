@@ -109,6 +109,113 @@ const Adduser = () => {
   //   }
   // };
 
+  // const handleAdd = async () => {
+  //   try {
+  //     const chatId =
+  //       currentUser.id > user.id
+  //         ? `${currentUser.id}_${user.id}`
+  //         : `${user.id}_${currentUser.id}`;
+  //     const chatRef = doc(db, "chats", chatId);
+
+  //     // Check if chat already exists
+  //     const chatSnap = await getDoc(chatRef);
+  //     if (!chatSnap.exists()) {
+  //       await setDoc(chatRef, {
+  //         createdAt: serverTimestamp(),
+  //         messages: [],
+  //       });
+  //     }
+
+  //     // Update userChats for both users
+  //     const userChatsRef = collection(db, "userchats");
+  //     await setDoc(
+  //       doc(userChatsRef, user.id),
+  //       {
+  //         chats: arrayUnion({
+  //           chatId,
+  //           lastMessage: "",
+  //           receiverId: currentUser.id,
+  //           updatedAt: serverTimestamp(),
+  //         }),
+  //       },
+  //       { merge: true }
+  //     );
+
+  //     await setDoc(
+  //       doc(userChatsRef, currentUser.id),
+  //       {
+  //         chats: arrayUnion({
+  //           chatId,
+  //           lastMessage: "",
+  //           receiverId: user.id,
+  //           updatedAt: serverTimestamp(),
+  //         }),
+  //       },
+  //       { merge: true }
+  //     );
+
+  //     console.log("New chat created with ID:", chatId);
+  //   } catch (error) {
+  //     alert("Error adding user. Please try again.");
+  //     console.error("Error adding user:", error.message);
+  //   }
+  // };
+  
+  // const handleAdd = async () => {
+  //   try {
+  //     const chatId =
+  //       currentUser.id > user.id
+  //         ? `${currentUser.id}_${user.id}`
+  //         : `${user.id}_${currentUser.id}`;
+  //     const chatRef = doc(db, "chats", chatId);
+  
+  //     // Check if chat already exists
+  //     const chatSnap = await getDoc(chatRef);
+  //     if (!chatSnap.exists()) {
+  //       await setDoc(chatRef, {
+  //         createdAt: serverTimestamp(),
+  //         messages: [],
+  //       });
+  //     }
+  
+  //     // Update userChats for both users
+  //     const userChatsRef = collection(db, "userchats");
+  
+  //     // Add chat to current user's chats with a timestamp field added separately
+  //     await setDoc(
+  //       doc(userChatsRef, user.id),
+  //       {
+  //         chats: arrayUnion({
+  //           chatId,
+  //           lastMessage: "",
+  //           receiverId: currentUser.id,
+  //           updatedAt: serverTimestamp(),  // Now, timestamp is placed correctly here
+  //         }),
+  //       },
+  //       { merge: true }
+  //     );
+  
+  //     // Add chat to the other user's chats with a timestamp field
+  //     await setDoc(
+  //       doc(userChatsRef, currentUser.id),
+  //       {
+  //         chats: arrayUnion({
+  //           chatId,
+  //           lastMessage: "",
+  //           receiverId: user.id,
+  //           updatedAt: serverTimestamp(),
+  //         }),
+  //       },
+  //       { merge: true }
+  //     );
+  
+  //     console.log("New chat created with ID:", chatId);
+  //   } catch (error) {
+  //     alert("Error adding user. Please try again.");
+  //     console.error("Error adding user:", error.message);
+  //   }
+  // };
+  
   const handleAdd = async () => {
     try {
       const chatId =
@@ -116,7 +223,7 @@ const Adduser = () => {
           ? `${currentUser.id}_${user.id}`
           : `${user.id}_${currentUser.id}`;
       const chatRef = doc(db, "chats", chatId);
-
+  
       // Check if chat already exists
       const chatSnap = await getDoc(chatRef);
       if (!chatSnap.exists()) {
@@ -125,9 +232,11 @@ const Adduser = () => {
           messages: [],
         });
       }
-
-      // Update userChats for both users
+  
+      // Update userChats for both users (without the serverTimestamp)
       const userChatsRef = collection(db, "userchats");
+  
+      // Add chat to current user's chats
       await setDoc(
         doc(userChatsRef, user.id),
         {
@@ -135,12 +244,12 @@ const Adduser = () => {
             chatId,
             lastMessage: "",
             receiverId: currentUser.id,
-            updatedAt: serverTimestamp(),
           }),
         },
         { merge: true }
       );
-
+  
+      // Add chat to the other user's chats
       await setDoc(
         doc(userChatsRef, currentUser.id),
         {
@@ -148,12 +257,26 @@ const Adduser = () => {
             chatId,
             lastMessage: "",
             receiverId: user.id,
-            updatedAt: serverTimestamp(),
           }),
         },
         { merge: true }
       );
-
+  
+      // Now update the updatedAt field with serverTimestamp separately
+      await updateDoc(doc(userChatsRef, user.id), {
+        chats: arrayUnion({
+          chatId,
+          updatedAt: serverTimestamp(), // Add timestamp in a separate update
+        }),
+      });
+  
+      await updateDoc(doc(userChatsRef, currentUser.id), {
+        chats: arrayUnion({
+          chatId,
+          updatedAt: serverTimestamp(), // Add timestamp in a separate update
+        }),
+      });
+  
       console.log("New chat created with ID:", chatId);
     } catch (error) {
       alert("Error adding user. Please try again.");
