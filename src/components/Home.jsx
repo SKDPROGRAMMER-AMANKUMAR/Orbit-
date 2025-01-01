@@ -3,7 +3,7 @@ import List from "./list/List";
 import Chat from "./chat/Chat";
 import Detail from "./detail/Detail";
 import { useChatStore } from "../lib/chatStore";
-import { auth, db } from "../../lib/firebase";
+import { auth } from "../lib/firebase";
 // import { useChatStore } from "../../lib/chatStore";
 // import { FiLogOut } from "react-icons/fi";
 
