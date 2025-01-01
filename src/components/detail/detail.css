@@ -1,0 +1,141 @@
+.detail {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .user {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid #dddddd35;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .info {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-height: 0; 
+    overflow-y: hidden;
+    height: calc(100% - 95px); 
+
+    .option {
+      padding: 8px 0;
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        img {
+          width: 20px;
+          height: 20px;
+          background-color: rgba(17, 25, 40, 0.3);
+          padding: 5px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+      }
+
+      .photos {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 15px;
+
+        .photoItem {
+          display: flex;
+          align-items: center;
+          padding: 0 5px;
+            
+          .photoDetail {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            padding-right: 10px;
+
+            img {
+              width: 35px !important;
+              height: 35px !important;
+              border-radius: 5px !important;
+              object-fit: cover !important;
+            }
+
+            span {
+              flex: 1;
+              font-size: 14px;
+              color: lightgray;
+              font-weight: 300;
+              margin-left: 12px;
+            }
+
+            .icon {
+              width: 20px !important;
+              height: 20px !important;
+              background-color: rgba(17, 25, 40, 0.3);
+              padding: 5px;
+              border-radius: 50%;
+              cursor: pointer;
+              margin-left: auto;
+            }
+          }
+        }
+      }
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: rgba(230,74,105,0.553);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0;
+
+      &:hover {
+        background-color: rgba(232, 14, 58, 0.749);
+      }
+
+      &.logout {
+        padding: 12px;
+        background-color: blue;
+        margin-top: 8px;
+      }
+    }
+  }
+}
+
+/* // Optional: Add custom scrollbar styling */
+.info {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  /* // Hide scrollbar when not needed */
+  &::-webkit-scrollbar-thumb:vertical {
+    min-height: 30px;
+    display: none;
+  }
+
+  &:hover::-webkit-scrollbar-thumb:vertical {
+    display: block;
+  }
+}
