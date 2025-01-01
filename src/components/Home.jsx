@@ -3,6 +3,8 @@ import List from "./list/List";
 import Chat from "./chat/Chat";
 import Detail from "./detail/Detail";
 import { useChatStore } from "../lib/chatStore";
+import { auth, db } from "../../lib/firebase";
+// import { useChatStore } from "../../lib/chatStore";
 // import { FiLogOut } from "react-icons/fi";
 
 const Home = () => {
@@ -20,6 +22,13 @@ const Home = () => {
       {/* ) : ( */}
       {/* // <Login /> */}
       {/* )} */}
+
+
+      <button onClick={() => auth.signOut()} className="logout">
+          {" "}
+          <LogOut size={20} />
+          Logout
+        </button>
     </div>
 
     {/* <div className="container"> */}

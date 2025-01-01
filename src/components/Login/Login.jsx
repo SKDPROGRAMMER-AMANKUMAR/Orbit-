@@ -38,11 +38,11 @@ const Login = () => {
           const response =   await signInWithEmailAndPassword(auth,email,password);
             console.log("The login data is:",response)
             toast.success('Login successful')
+            navigate('/');
           } catch (error) {
             console.log(error)
             toast.error('Failed to login')
           } finally {
-          navigate('/');
             setLoading(false);
             e.target.reset();
         }
